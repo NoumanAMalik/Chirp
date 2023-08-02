@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { UserButton } from "@clerk/nextjs";
+import { SignUpButton } from "@clerk/nextjs";
+import { SignInButton } from "@clerk/nextjs";
 
 export default function Navbar(props) {
     let { route } = props;
@@ -39,34 +42,35 @@ export default function Navbar(props) {
             </div>
             <div className="flex-none">
                 {route == "sign-up" ? (
-                    <Link href="/signup">
+                    <SignUpButton mode="modal">
                         <button className="btn btn-ghost normal-case underline">
                             Sign-up
                         </button>
-                    </Link>
+                    </SignUpButton>
                 ) : (
-                    <Link href="/signup">
+                    <SignUpButton mode="modal">
                         <button className="btn btn-ghost normal-case">
                             Sign-up
                         </button>
-                    </Link>
+                    </SignUpButton>
                 )}
             </div>
             <div className="flex-none">
                 {route == "sign-in" ? (
-                    <Link href="/signin">
+                    <SignInButton mode="modal">
                         <button className="btn btn-ghost normal-case underline">
                             Sign-in
                         </button>
-                    </Link>
+                    </SignInButton>
                 ) : (
-                    <Link href="/signin">
+                    <SignInButton mode="modal">
                         <button className="btn btn-ghost normal-case">
                             Sign-in
                         </button>
-                    </Link>
+                    </SignInButton>
                 )}
             </div>
+            <div className="flex-none"></div>
         </div>
     );
 }
