@@ -3,6 +3,7 @@
 import Navbar from "../components/navbar";
 import { useAuth } from "@clerk/clerk-react";
 import { createClient } from "@supabase/supabase-js";
+import { useState } from "react";
 
 const supabaseClient = async (supabaseAccessToken) => {
     const supabase = createClient(
@@ -20,7 +21,8 @@ const supabaseClient = async (supabaseAccessToken) => {
 };
 
 export default function Timeline() {
-    const { getToken } = useAuth();
+    const [username, setUsername] = useState("");
+    const { getToken, userId } = useAuth();
 
     const fetchData = async () => {
         // TODO #1: Replace with your JWT template name
@@ -30,9 +32,12 @@ export default function Timeline() {
 
         // TODO #2: Replace with your database table name
 
-        const { data, error } = await supabase.from("users").select();
+        const { data, error } = await supabase
+            .from("users")
+            .select("username")
+            .eq("clerkId", userId);
 
-        console.log(data);
+        setUsername(data[0].username);
 
         // TODO #3: Handle the response
     };
@@ -42,6 +47,7 @@ export default function Timeline() {
     return (
         <main data-theme="dark" className="w-screen h-screen">
             <Navbar route={"timeline"} />
+            <p>Hello {username}</p>
         </main>
     );
 }

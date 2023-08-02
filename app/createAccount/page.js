@@ -22,7 +22,14 @@ const supabaseClient = async (supabaseAccessToken) => {
 };
 
 export default function CreateAccount() {
-    const { getToken } = useAuth();
+    const { getToken, userId } = useAuth();
+    const [formData, setFormData] = useState({
+        name: "",
+        username: "",
+    });
+    const router = useRouter();
+
+    console.log(userId);
 
     const fetchData = async () => {
         // TODO #1: Replace with your JWT template name
@@ -38,15 +45,21 @@ export default function CreateAccount() {
 
         // TODO #3: Handle the response
     };
-    const [formData, setFormData] = useState({
-        email: "",
-        password: "",
-        username: "",
-    });
-
-    const router = useRouter();
 
     const handleSubmit = async () => {
+        const supabaseAccessToken = await getToken({ template: "supabase" });
+
+        const supabase = await supabaseClient(supabaseAccessToken);
+
+        const { data, error } = await supabase.from("users").insert({
+            name: formData.name,
+            username: formData.username,
+            clerkId: userId,
+        });
+
+        console.log(data, error);
+
+        router.push("/timeline");
         // const data = await supabase.auth.signUp({
         //     email: formData.email,
         //     password: formData.password,
@@ -80,27 +93,14 @@ export default function CreateAccount() {
 
             <div className="form-control w-full max-w-xs">
                 <label className="label">
-                    <span className="label-text">Enter your email</span>
+                    <span className="label-text">Enter your name</span>
                 </label>
                 <input
                     type="text"
-                    placeholder="abc@gmail.com"
-                    value={formData.email}
+                    placeholder="John Smoth"
+                    value={formData.name}
                     onChange={(e) =>
-                        setFormData({ ...formData, email: e.target.value })
-                    }
-                    className="input input-bordered w-full max-w-xs mb-6"
-                />
-
-                <label className="label">
-                    <span className="label-text">Enter a password</span>
-                </label>
-                <input
-                    type="password"
-                    placeholder="Type here"
-                    value={formData.password}
-                    onChange={(e) =>
-                        setFormData({ ...formData, password: e.target.value })
+                        setFormData({ ...formData, name: e.target.value })
                     }
                     className="input input-bordered w-full max-w-xs mb-6"
                 />
