@@ -70,7 +70,9 @@ export default function Navbar(props) {
                     </SignInButton>
                 )}
             </div>
-            <div className="flex-none"></div>
+            <div className="flex-none">
+                <UserButton />
+            </div>
         </div>
     );
 }
