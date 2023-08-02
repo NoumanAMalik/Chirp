@@ -1,8 +1,11 @@
 "use client";
 
 import Navbar from "../components/navbar";
-import supabase from "../../utils/supabase";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+
 export default function Timeline() {
+    const supabase = createClientComponentClient();
+
     const checkAuth = async () => {
         const user = await supabase.auth.getUser();
 

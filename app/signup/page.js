@@ -2,8 +2,8 @@
 
 import Navbar from "../components/navbar";
 import { useState, useEffect } from "react";
-import supabase from "../../utils/supabase";
 import { useRouter } from "next/navigation";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 export default function Timeline() {
     const [formData, setFormData] = useState({
@@ -14,8 +14,10 @@ export default function Timeline() {
 
     const router = useRouter();
 
+    const supabase = createClientComponentClient();
+
     const handleSubmit = async () => {
-        const { data, error } = await supabase.auth.signUp({
+        const data = await supabase.auth.signUp({
             email: formData.email,
             password: formData.password,
             options: {
@@ -25,18 +27,20 @@ export default function Timeline() {
             },
         });
 
-        const access_token = data.session.access_token;
-        const refresh_token = data.session.refresh_token;
+        console.log(data);
 
-        console.log(access_token, refresh_token);
+        // const access_token = data.session.access_token;
+        // const refresh_token = data.session.refresh_token;
 
-        if (data.user.aud == "authenticated") {
-            const { data, error } = supabase.auth.setSession({
-                access_token,
-                refresh_token,
-            });
-            router.push("/timeline");
-        }
+        // console.log(access_token, refresh_token);
+
+        // if (data.user.aud == "authenticated") {
+        // const { data, error } = supabase.auth.setSession({
+        //     access_token,
+        //     refresh_token,
+        // });
+        // router.push("/timeline");
+        // }
     };
 
     return (
