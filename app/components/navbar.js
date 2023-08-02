@@ -1,10 +1,13 @@
+"use client";
+
 import Link from "next/link";
 import { UserButton } from "@clerk/nextjs";
-import { SignUpButton } from "@clerk/nextjs";
+import { SignUpButton, useUser } from "@clerk/nextjs";
 import { SignInButton } from "@clerk/nextjs";
 
 export default function Navbar(props) {
     let { route } = props;
+    const { isSignedIn, user, isLoaded } = useUser();
 
     return (
         <div className="navbar bg-base-100">
@@ -40,7 +43,7 @@ export default function Navbar(props) {
                     </Link>
                 )}
             </div>
-            <div className="flex-none">
+            {/* <div className="flex-none">
                 {route == "sign-up" ? (
                     <SignUpButton mode="modal">
                         <button className="btn btn-ghost normal-case underline">
@@ -69,9 +72,24 @@ export default function Navbar(props) {
                         </button>
                     </SignInButton>
                 )}
+            </div> */}
+            <div className="flex-none">
+                {route == "create-account" ? (
+                    <Link href="/createAccount">
+                        <button className="btn btn-ghost normal-case underline">
+                            Create Account
+                        </button>
+                    </Link>
+                ) : (
+                    <Link href="/createAccount">
+                        <button className="btn btn-ghost normal-case">
+                            Create Account
+                        </button>
+                    </Link>
+                )}
             </div>
             <div className="flex-none">
-                <UserButton />
+                <UserButton afterSignOutUrl="/" />
             </div>
         </div>
     );
