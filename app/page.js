@@ -4,7 +4,7 @@ import { SignUpButton, SignInButton } from "@clerk/nextjs";
 export default function Home() {
     return (
         <main
-            data-theme="dark"
+            data-theme="aqua"
             className="w-screen h-screen flex flex-col items-center gap-12"
         >
             <Navbar route={"home"} />

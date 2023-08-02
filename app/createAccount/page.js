@@ -64,7 +64,7 @@ export default function CreateAccount() {
 
     return (
         <main
-            data-theme="dark"
+            data-theme="aqua"
             className="w-screen h-screen flex flex-col items-center gap-12"
         >
             <Navbar route={"create-account"} />
@@ -99,7 +99,7 @@ export default function CreateAccount() {
                 />
 
                 <button
-                    className="btn btn-primary normal-case"
+                    className="btn btn-accent normal-case"
                     onClick={handleSubmit}
                 >
                     Submit

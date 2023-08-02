@@ -115,7 +115,7 @@ export default function Timeline() {
 
     return (
         <main
-            data-theme="dark"
+            data-theme="aqua"
             className="w-screen h-screen flex flex-col items-center gap-12"
         >
             <Navbar route={"timeline"} />
@@ -132,15 +132,15 @@ export default function Timeline() {
                             />
                         );
                     })}
-                <div className="join sticky bottom-0 mt-12">
+                <div className="join sticky bottom-4 w-full max-w-md mt-12">
                     <input
-                        className="input input-bordered join-item"
+                        className="input input-bordered join-item w-full max-w-md"
                         value={message}
                         placeholder="Type here ..."
                         onChange={(e) => setMessage(e.target.value)}
                     />
                     <button
-                        className="btn btn-primary join-item normal case"
+                        className="btn btn-accent join-item normal case"
                         onClick={post}
                     >
                         Post
