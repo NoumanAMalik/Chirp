@@ -60,26 +60,6 @@ export default function CreateAccount() {
         console.log(data, error);
 
         router.push("/timeline");
-        // const data = await supabase.auth.signUp({
-        //     email: formData.email,
-        //     password: formData.password,
-        //     options: {
-        //         data: {
-        //             username: formData.username,
-        //         },
-        //     },
-        // });
-        // console.log(data);
-        // const access_token = data.session.access_token;
-        // const refresh_token = data.session.refresh_token;
-        // console.log(access_token, refresh_token);
-        // if (data.user.aud == "authenticated") {
-        // const { data, error } = supabase.auth.setSession({
-        //     access_token,
-        //     refresh_token,
-        // });
-        // router.push("/timeline");
-        // }
     };
 
     return (

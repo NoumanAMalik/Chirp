@@ -3,10 +3,8 @@
 import Navbar from "../components/navbar";
 import Post from "../components/post";
 import { useAuth } from "@clerk/clerk-react";
-import { createClient } from "@supabase/supabase-js";
 import { useState, useEffect } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import supabase from "@/lib/supabaseClient";
 import { useRouter } from "next/navigation";
 
 const supabaseClient = async (supabaseAccessToken) => {
@@ -79,6 +77,7 @@ export default function Timeline() {
     useEffect(() => {
         (async function () {
             await getId();
+            await fetchData();
         })();
     }, [allMessages]);
 
@@ -108,7 +107,7 @@ export default function Timeline() {
             className="w-screen h-screen flex flex-col items-center gap-12"
         >
             <Navbar route={"timeline"} />
-            <p>Hello {username}</p>
+            <p>Welcome {username}</p>
             <div className="w-full max-w-md">
                 {allMessages &&
                     allMessages.map((element) => {
