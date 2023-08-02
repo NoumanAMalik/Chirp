@@ -37,6 +37,7 @@ export default function Timeline() {
             const supabaseAccessToken = await getToken({
                 template: "supabase",
             });
+            if (supabaseAccessToken == null) return;
             const supabase = createClientComponentClient(supabaseAccessToken);
 
             const { data, error } = await supabase.from("messages").select();
@@ -46,6 +47,12 @@ export default function Timeline() {
             return data;
         })().then((data) => setAllMessages(data));
     }, [reloadMessages]);
+
+    useEffect(() => {
+        getToken({
+            template: "supabase",
+        }).then(setReloadMessages((prev) => (prev += 1)));
+    }, []);
 
     const fetchData = async () => {
         const supabaseAccessToken = await getToken({
@@ -65,6 +72,7 @@ export default function Timeline() {
         const supabaseAccessToken = await getToken({
             template: "supabase",
         });
+        if (supabaseAccessToken == null) return;
         const supabase = createClientComponentClient(supabaseAccessToken);
 
         let { data, error } = await supabase
