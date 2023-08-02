@@ -129,6 +129,8 @@ export default function Timeline() {
                                 username={element.username}
                                 current_user={element.user_id == curUserId}
                                 key={element.id}
+                                id={element.id}
+                                setReloadMessages={setReloadMessages}
                             />
                         );
                     })}
