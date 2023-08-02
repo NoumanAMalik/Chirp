@@ -39,24 +39,32 @@ export default function Navbar(props) {
             </div>
             <div className="flex-none">
                 {route == "sign-up" ? (
-                    <button className="btn btn-ghost normal-case underline">
-                        Sign-up
-                    </button>
+                    <Link href="/signup">
+                        <button className="btn btn-ghost normal-case underline">
+                            Sign-up
+                        </button>
+                    </Link>
                 ) : (
-                    <button className="btn btn-ghost normal-case">
-                        Sign-up
-                    </button>
+                    <Link href="/signup">
+                        <button className="btn btn-ghost normal-case">
+                            Sign-up
+                        </button>
+                    </Link>
                 )}
             </div>
             <div className="flex-none">
                 {route == "sign-in" ? (
-                    <button className="btn btn-ghost normal-case underline">
-                        Sign-in
-                    </button>
+                    <Link href="/signin">
+                        <button className="btn btn-ghost normal-case underline">
+                            Sign-in
+                        </button>
+                    </Link>
                 ) : (
-                    <button className="btn btn-ghost normal-case">
-                        Sign-in
-                    </button>
+                    <Link href="/signin">
+                        <button className="btn btn-ghost normal-case">
+                            Sign-in
+                        </button>
+                    </Link>
                 )}
             </div>
         </div>
