@@ -28,6 +28,7 @@ export default function Timeline() {
     const [message, setMessage] = useState("");
     const [allMessages, setAllMessages] = useState();
     const [curUserId, setCurUserId] = useState();
+    const [reloadMessages, setReloadMessages] = useState(0);
 
     const router = useRouter();
 
@@ -40,9 +41,11 @@ export default function Timeline() {
 
             const { data, error } = await supabase.from("messages").select();
 
+            console.log("Calls server");
+
             return data;
         })().then((data) => setAllMessages(data));
-    });
+    }, [reloadMessages]);
 
     const fetchData = async () => {
         const supabaseAccessToken = await getToken({
@@ -99,6 +102,7 @@ export default function Timeline() {
             .select();
 
         router.refresh();
+        setReloadMessages((prev) => (prev += 1));
     };
 
     return (
