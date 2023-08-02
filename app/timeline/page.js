@@ -1,8 +1,7 @@
 "use client";
 
 import Navbar from "../components/navbar";
-import supabase from "../utils/supabase.js";
-
+import supabase from "../../utils/supabase";
 export default function Timeline() {
     const checkAuth = async () => {
         const user = await supabase.auth.getUser();
